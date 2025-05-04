@@ -1,0 +1,28 @@
+struct ListNode* insertionSortList(struct ListNode* head) {
+    // Dummy node to help with insertion at the head
+    struct ListNode dummy;
+    dummy.next = NULL;
+
+    struct ListNode* current = head;
+
+    while (current) {
+        struct ListNode* prev = &dummy;
+
+        // Find the right spot in the sorted list
+        while (prev->next && prev->next->val < current->val) {
+            prev = prev->next;
+        }
+
+        // Save next node to continue iteration
+        struct ListNode* nextTemp = current->next;
+
+        // Insert current between prev and prev->next
+        current->next = prev->next;
+        prev->next = current;
+
+        // Move to the next node in original list
+        current = nextTemp;
+    }
+
+    return dummy.next;
+}
