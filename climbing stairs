@@ -1,0 +1,24 @@
+int climbStairs(int n) {
+    // If there's only 1 step, there's only 1 way to climb it
+    if (n == 1)
+        return 1;
+
+    // If there are 2 steps, there are 2 ways: (1+1) or (2)
+    if (n == 2)
+        return 2;
+
+    // Initialize the first two base cases
+    int a = 1; // ways to reach step 1
+    int b = 2; // ways to reach step 2
+    int temp;  // temporary variable to store the new number of ways
+
+    // Loop from step 3 to n
+    for (int i = 3; i <= n; i++) {
+        temp = a + b; // total ways to reach step i
+        a = b;        // update a to previous step (i-1)
+        b = temp;     // update b to current step (i)
+    }
+
+    // b now holds the number of ways to reach step n
+    return b;
+}
