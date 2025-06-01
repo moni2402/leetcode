@@ -1,0 +1,19 @@
+int searchInsert(int* nums, int numsSize, int target) {
+    int low = 0, high = numsSize;  // 'high' is exclusive
+
+    // Binary search loop
+    while (low < high) {
+        int mid = low + (high - low) / 2;  // Prevents integer overflow
+
+        if (nums[mid] >= target) {
+            // If mid element is greater or equal, target must be in left half (or at mid)
+            high = mid;
+        } else {
+            // If mid element is less, discard left half including mid
+            low = mid + 1;
+        }
+    }
+
+    // When loop ends, 'low' is the correct insert position
+    return low;
+}
